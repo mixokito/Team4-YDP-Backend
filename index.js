@@ -1,9 +1,14 @@
 import express from 'express';
 import { createUsers, deleteUsers, getUsers, } from './depositories/mongoDb.js';
 
+// นำเข้า routes
+import authRoutes from './routes/authRoutes.js';
+import searchRoutes from './routes/searchRoutes.js';
+
 const app = express()
 const port = 3000
 
+// Middleware
 app.use(express.json())
 
 app.get('/', (req, res) => {
@@ -52,6 +57,13 @@ app.post('/post', (req, res) => {
   console.log(req.body)
   console.log(req.body.title)
 })
+
+// เชื่อมต่อ Routes
+// Route สำหรับ Authentication (register, login, logout)
+app.use('/api/auth', authRoutes);
+
+// Route สำหรับ Search
+app.use('/api/search', searchRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
