@@ -7,7 +7,7 @@ const port = 3000
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('team 4 backend')
 })
 
 app.get('/mokito', (req, res) => {
