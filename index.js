@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUsers, deleteUsers, getUsers, } from './depositories/mongoDb.js';
+import { createUsers, deleteUsers, getUsers, } from './repositories/mongoDb.js';
 
 // นำเข้า routes
 import authRoutes from './routes/authRoutes.js';
