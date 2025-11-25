@@ -10,22 +10,38 @@ export const register = async (req, res) => {
   try {
     // 1. รับข้อมูลจาก request body (username, email, password)
     // const { username, email, password } = req.body;
+    const { username, firstname, lastname, email, password } = req.body;
 
     // 2. ตรวจสอบว่ามีข้อมูลครบถ้วนหรือไม่
-    // code here
+    if (!username || !firstname || !lastname || !email || !password) {
+      return res.status(400).json({ message: 'Please enter all fields' });
+    }
 
     // 3. ตรวจสอบว่า email หรือ username ซ้ำในระบบหรือไม่
-    // code here
+    const emailCheck = await User.findOne({ "email": email });
+
+    if (emailCheck !== null) {
+      return res.status(400).json({ message: 'Email already exists' });
+    }
 
     // 4. เข้ารหัส password ด้วย bcrypt
     // const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // 5. สร้างผู้ใช้ใหม่ในฐานข้อมูล
     // const newUser = new User({ ... });
     // await newUser.save();
+    const newUser = await User.create({
+      username,
+      firstname,
+      lastname,
+      email,
+      password: hashedPassword
+    });
 
     // 6. ส่ง response กลับไปว่าสำเร็จ
     // res.status(201).json({ message: 'ลงทะเบียนสำเร็จ' });
+    return res.status(201).json({ message: 'Register Success' });
 
   } catch (error) {
     // จัดการ error
@@ -75,7 +91,7 @@ export const logout = async (req, res) => {
   try {
     // สำหรับ JWT token การ logout จะทำที่ฝั่ง client โดยการลบ token
     // แต่ถ้าต้องการให้เซิร์ฟเวอร์จัดการ สามารถ:
-    
+
     // 1. เก็บ token ที่ logout แล้วใน blacklist (database หรือ Redis)
     // code here
 

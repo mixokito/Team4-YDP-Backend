@@ -14,6 +14,22 @@ const userSchema = new mongoose.Schema({
     minlength: [3, 'ชื่อผู้ใช้ต้องมีอย่างน้อย 3 ตัวอักษร']
   },
 
+  firstname: {
+    type: String,
+    required: [true, 'กรุณาระบุชื่อผู้ใช้'],
+    trim: true,
+    minlength: [3, 'ชื่อผู้ใช้ต้องมีอย่างน้อย 3 ตัวอักษร'],
+    maxlength: [30, 'ชื่อผู้ใช้ต้องมีไม่เกิน 30 ตัวอักษร']
+  },
+
+  lastname: {
+    type: String,
+    required: [true, 'กรุณาระบุชื่อผู้ใช้'],
+    trim: true,
+    minlength: [3, 'ชื่อผู้ใช้ต้องมีอย่างน้อย 3 ตัวอักษร'],
+    maxlength: [30, 'ชื่อผู้ใช้ต้องมีไม่เกิน 30 ตัวอักษร']
+  },
+
   // อีเมล
   email: {
     type: String,
@@ -46,6 +62,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // สร้าง Model จาก Schema
-const User = mongoose.model('User', userSchema);
+const connection = mongoose.createConnection('mongodb+srv://team4:team4ydp@pemika.hzqduzq.mongodb.net/ydp-team4?appName=Pemika');
+const User = connection.model('User', userSchema);
 
 export default User;

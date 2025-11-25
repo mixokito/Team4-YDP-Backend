@@ -1,4 +1,5 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
+import UserModel from '../models/User.js';
 const uri = "mongodb+srv://team4:team4ydp@pemika.hzqduzq.mongodb.net/?appName=Pemika";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -22,49 +23,5 @@ async function run() {
     await client.close();
   }
 }
-
-async function getUsers() {
-    try {
-        await client.connect();
-        const database = client.db('Moki');
-        const users = database.collection('Users');
-        const results = await users.find({}).toArray();
-        return results;
-    } catch (error) {
-        console.error("Error fetching users:", error);
-        throw error;
-    } finally {
-        await client.close();
-    }
-}
-
-async function createUsers(name, age, likes) {
-    try {
-        await client.connect();
-        const database = client.db('Moki')
-        const users = database.collection('Users')
-        const result = await users.insertOne({ "name": name, "age": age, "likes": likes });
-        return result;
-    } catch (error) {
-        console.error("Error creating user:", error);
-        throw error;
-    }
-}
-
-async function deleteUsers(userId) {
-    try {
-        await client.connect();
-        const database = client.db('Moki')
-        const users = database.collection('Users')
-        const result = await users.deleteOne({ "name": userId });
-        return result;
-    } catch (error) {
-        console.error("Error deleting user:", error);
-        throw error;
-    }
-}
-
-
-export { getUsers, createUsers, deleteUsers };
 
 run().catch(console.dir);
