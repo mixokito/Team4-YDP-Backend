@@ -28,6 +28,13 @@ app.use('/api/auth', authRoutes);
 // Route สำหรับ Search
 app.use('/api/search', searchRoutes);
 
+// Authentication Middleware (ตัวอย่าง)
+import { verifyToken } from './middleware/authMiddleware.js';
+
+app.get('/api/test-auth', verifyToken, (req, res) => {
+  res.json({ message: 'Authenticated', user: req.user });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
