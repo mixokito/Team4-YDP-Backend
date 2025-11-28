@@ -9,6 +9,6 @@ const router = express.Router();
 
 // Route สำหรับค้นหา (ต้อง login ก่อน)
 // GET /api/search?q=keyword
-router.get('/', authMiddleware.verifyToken, searchController.search);
+router.get('/' , searchController.search);
 
 export default router;
