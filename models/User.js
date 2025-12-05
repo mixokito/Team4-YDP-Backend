@@ -14,45 +14,11 @@ const userSchema = new mongoose.Schema({
     minlength: [3, 'ชื่อผู้ใช้ต้องมีอย่างน้อย 3 ตัวอักษร']
   },
 
-  firstname: {
-    type: String,
-    required: [true, 'กรุณาระบุชื่อผู้ใช้'],
-    trim: true,
-    minlength: [3, 'ชื่อผู้ใช้ต้องมีอย่างน้อย 3 ตัวอักษร'],
-    maxlength: [30, 'ชื่อผู้ใช้ต้องมีไม่เกิน 30 ตัวอักษร']
-  },
-
-  lastname: {
-    type: String,
-    required: [true, 'กรุณาระบุชื่อผู้ใช้'],
-    trim: true,
-    minlength: [3, 'ชื่อผู้ใช้ต้องมีอย่างน้อย 3 ตัวอักษร'],
-    maxlength: [30, 'ชื่อผู้ใช้ต้องมีไม่เกิน 30 ตัวอักษร']
-  },
-
-  // อีเมล
-  email: {
-    type: String,
-    required: [true, 'กรุณาระบุอีเมล'],
-    unique: true,
-    lowercase: true,
-    trim: true,
-    match: [/^\S+@\S+\.\S+$/, 'กรุณาระบุอีเมลที่ถูกต้อง']
-  },
-
-  // รหัสผ่าน (ต้องเข้ารหัสก่อนบันทึก)
   password: {
     type: String,
     required: [true, 'กรุณาระบุรหัสผ่าน'],
     minlength: [6, 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร']
   },
-
-  // ข้อมูลเพิ่มเติม (ถ้ามี)
-  // profile: {
-  //   firstName: String,
-  //   lastName: String,
-  //   phoneNumber: String
-  // },
 
   // วันที่สร้าง
   createdAt: {

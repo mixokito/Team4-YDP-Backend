@@ -10,15 +10,16 @@ export const register = async (req, res) => {
   try {
     // 1. รับข้อมูลจาก request body (username, email, password)
     // const { username, email, password } = req.body;
-    const { username, firstname, lastname, email, password } = req.body;
+    const { username, password } = req.body;
 
     // 2. ตรวจสอบว่ามีข้อมูลครบถ้วนหรือไม่
-    if (!username || !firstname || !lastname || !email || !password) {
+    // 2. ตรวจสอบว่ามีข้อมูลครบถ้วนหรือไม่
+    if (!username || !password) {
       return res.status(400).json({ message: 'Please enter all fields' });
     }
 
     // 3. ตรวจสอบว่า email หรือ username ซ้ำในระบบหรือไม่
-    const existingUser = await User.findOne({ $or: [{ email: email }, { username: username }] });
+    const existingUser = await User.findOne({ username: username });
     if (existingUser) {
       return res.status(400).json({ message: 'Email or username already exists' });
     }
@@ -32,9 +33,6 @@ export const register = async (req, res) => {
     // await newUser.save();
     const newUser = await User.create({
       username,
-      firstname,
-      lastname,
-      email,
       password: hashedPassword
     });
 

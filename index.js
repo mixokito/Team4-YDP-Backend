@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 
 // นำเข้า routes
 import authRoutes from './routes/authRoutes.js';
@@ -10,6 +11,7 @@ const port = 3000
 
 // Middleware
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('team 4 backend')
