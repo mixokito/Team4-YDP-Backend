@@ -7,12 +7,8 @@ import * as authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// Route สำหรับค้นหาแบบปกติ
-// POST /api/search
-router.post('/', searchController.search);
-
-// Route สำหรับค้นหาด้วย AI
-// POST /api/search/ai
-router.post('/ai', searchController.aiSearch);
+// Route สำหรับค้นหา (ต้อง login ก่อน)
+// GET /api/search?q=keyword
+router.get('/' , searchController.search);
 
 export default router;
